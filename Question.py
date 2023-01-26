@@ -1,7 +1,10 @@
+import usefulFunctions
+
 class Question:
-    def __init__(self, question, answer):
+    def __init__(self, question, answer, explanation = ""):
         self.question = question
         self.answer = answer
+        self.explanation = explanation
 
     def check_answer(self, answer):
         if answer == self.answer:
@@ -9,32 +12,32 @@ class Question:
         else:
             return False
 
-questions = [Question("La divisione tra contenuto e presentazione di un sito web contribuisce ad abbassare il suo peso totale", "V"),
-    Question("La divisione tra contenuto e presentazione di un sito web contribuisce a migliorarne la sua manutenibilità", "V"),
-    Question("La divisione tra contenuto e presentazione contribuisce ad un buon posizionamento nei risultati dei motori di ricerca", "V"),
-    Question("Una struttura organizzativa gerarchica, per essere efficiente, deve essere ampia e poco profonda", "V"),
-    Question("La divisione tra contenuto e comportamento contribuisce ad abbassare la dimensione totale di un sito web.", "V"),
-    Question("Le tabelle sono sempre un ostacolo alla facile comprensione del contenuto e per questo andrebbero evitate ove possibile", "V"),
-    Question("Un test esaustivo dell’accessibilità della pagina non può essere fatto in modo automatico.", "V"),
-    Question("Una struttura organizzativa, per essere efficiente, deve essere ampia e poco profonda", "V"),
-    Question("La validazione del codice HTML e CSS di un sito web è condizione necessaria per garantire la sua accessibilità.", "V"),
-    Question("Il layout a schede va facilmente incontro a problemi di manutenzione nel tempo.", "V"),
-    Question("Le convenzioni interne devono sempre essere rispettate per evitare di disorientare l’utente", "V"),
-    Question("È buona regola segnalare i link che portano ad elementi diversi da pagine web (es. pdf)", "V"),
-    Question("Le WCAG richiedono di identificare in modo diverso i link visitati dai link non visitati.", "V"),
-    Question("La divisione tra contenuto e presentazione di una pagina web e condizione necessaria e sufficiente per garantirne l’accessibilità", "F"),
-    Question("La presenza di una parola nel metatag keywords è condizione sufficiente per modificare il posizionamento di una pagina web nelle pagine di risposta dei motori di ricerca", "F"),
-    Question("La presenza di una barra con il path di contesto in una pagina web evita il sovraccarico cognitivo dell’utente", "F"),
-    Question("Il contenuto del metatag author influenza il posizionamento di una pagina web nelle pagine di risposta dei motori di ricerca", "F"),
-    Question("Il layout a schede è fortemente consigliato in caso di tassonomie con molte voci nello stesso livello e poco profonde", "F"),
-    Question("La divisione tra contenuto e comportamento aiuta a migliorare il posizionamento nelle risposte dei motori di ricerca", "F"),
-    Question("La divisione tra struttura e presentazione non contribuisce al posizionamento della pagina nelle SERP del motore di ricerca.", "F"),
-    Question("Il contenuto del tag <title> deve sempre esprimere prima il contesto generale e poi quello particolare", "F"),
-    Question("È buona norma utilizzare icone con bandiere per indicare link a pagine in altre lingue", "F"),
-    Question("L’uso dei menù a scomparsa non influisce sull'accessibilità di un sito.", "F"),
-    Question("L’uso dei colori non influenza l’accessibilità del sito.", "F"),
-    Question("Il tag <input> in XHTML può essere figlio diretto di una <form>", "F"),
-    Question("Permettere la fruibilità di una pagina mediante screen reader è condizione necessaria e sufficiente a garantirne l’accessibilità?", "F"),
-    Question("Il numero massimo di voci in un menu è 6", "F"),
-    Question("La separazione tra struttura, contenuto e presentazione aiuta il posizionamento nelle pagine SERP?", "F"),
+questions = [Question("La divisione tra contenuto e presentazione di un sito web contribuisce ad abbassare il suo peso totale", "V", "Utilizzando lo stesso file CSS per più pagine o elementi del mio sito evitando quindi di scrivere ripetizioni superflue."),
+    Question("La divisione tra contenuto e presentazione di un sito web contribuisce a migliorarne la sua manutenibilità", "V", "Suddividendo il contenuto, scritto spesso in HTML e la presentazione in CSS, è possibile modificarne una delle due non intaccandone l’altra. Inoltre è un sistema più ordinato e più facile da capire anche per chi non è stato l’autore del sito."),
+    Question("La divisione tra contenuto e presentazione contribuisce ad un buon posizionamento nei risultati dei motori di ricerca", "V", "I motori di ricerca leggono solo i primi byte del sito. Proprio per questo se ci fosse lo style completo della pagina in caso di CSS Embedded o linee inline di CSS, il motore di ricerca non leggerebbe mai il contenuto o solo una parte di quanto potrebbe."),
+    Question("Una struttura organizzativa gerarchica, per essere efficiente, deve essere ampia e poco profonda", "V", "Una buona gerarchia è ampia, ed ampiezza è intesa come il numero di opzioni ad ogni livello, ma non troppo da portare al sovraccarico cognitivo, è consigliato per le voci di menu di un massimo di 10 e poco profonda, inteso come i numero di livelli della gerarchia, è consigliato un massimo di 4 o 5 livelli perché corrisponderanno al numero di click che deve effettuare l’utente per trovare l’informazione ed è noto che l’utente oggi è un utente pigro."),
+    Question("La divisione tra contenuto e comportamento contribuisce ad abbassare la dimensione totale di un sito web.", "V", "Unknown"),
+    Question("Le tabelle sono sempre un ostacolo alla facile comprensione del contenuto e per questo andrebbero evitate ove possibile", "V", "Sono di difficile comprensione per le persone non vedenti o comunque con problemi di vista. Devono essere progettate molto bene per essere per lo meno comprensibili a questo tipo di persone. Inoltre vengono spesso utilizzate come struttura di una pagina o parte di una pagina e questo comporta a instabilità, rigidità e pesantezza della pagina."),
+    Question("Un test esaustivo dell’accessibilità della pagina non può essere fatto in modo automatico.", "V", "L’accessibilità di una pagina può essere testata in maniera automatica o tramite un controllo automatico. Il test automatico è sicuramente più rapido ed economico ma non riesce ad individuare tutti i possibili problemi di accessibilità che sarebbero evidenti ad un occhio umano."),
+    Question("Una struttura organizzativa, per essere efficiente, deve essere ampia e poco profonda", "V", "Quando si va a costruire una struttura gerarchica bisogna trovare un buon compromesso tra profondità e ampiezza: una profondità eccessiva porta a dover effettuare troppi click per raggiungere l’informazione, mentre un ampiezza eccessiva porta al sovraccarico cognitivo."),
+    Question("La validazione del codice HTML e CSS di un sito web è condizione necessaria per garantire la sua accessibilità.", "V", "È condizione necessaria ma non sufficiente, poiché per arrivare ad avere una valutazione esaustiva dell’accessibilità di una pagina servono altri controlli, come il controllo umano."),
+    Question("Il layout a schede va facilmente incontro a problemi di manutenzione nel tempo.", "V", "Il layout a schede è particolarmente sconsigliato per siti in evoluzione nel tempo, in quanto è per sua natura poco flessibile e mantenibile."),
+    Question("Le convenzioni interne devono sempre essere rispettate per evitare di disorientare l’utente", "V", "Essere consistenti nell’uso delle convenzioni interne aiuta a creare uno schema mentale nell’utente, cosi che il sito sia sempre familiare più lo si usa"),
+    Question("È buona regola segnalare i link che portano ad elementi diversi da pagine web (es. pdf)", "V", "Vero in quanto in base ai principi di progettazione web, è sempre meglio non tradire le aspettative dell’utente. Per evitare disorientamento dell’utente conviene avvisarlo se accade qualcosa di diverso da ciò che si aspetta (un utente cliccando su un link qualsiasi si aspetta l’apertura di una nuova pagina in quella stessa scheda del browser), quindi è bene specificare se si apre un pdf e se l’elemento si scarica in automatico è opportuno indicare anche il peso di quell’elemento."),
+    Question("Le WCAG richiedono di identificare in modo diverso i link visitati dai link non visitati.", "V", "Vero in quanto il fatto che il colore del link sia cambiato, porta un informazione utile all’utente in fatto al “dove sono già stato”, aiutandolo cosi nell’orientarsi potendo cosi distinguere cosa non ha ancora guardato e cosa ha gia guardato."),
+    Question("La divisione tra contenuto e presentazione di una pagina web e condizione necessaria e sufficiente per garantirne l’accessibilità", "F", "Non è condizione sufficiente, poiché non garantisce di per se accessibilità alle persone ipovedenti, non vedenti, utenti inesperti o stranieri, limitati dalla macchina a disposizione, ecc…"),
+    Question("La presenza di una parola nel metatag keywords è condizione sufficiente per modificare il posizionamento di una pagina web nelle pagine di risposta dei motori di ricerca", "F", "Non è condizione sufficiente inserire nel metatag keywords diverse parole, poiché il browser effettua una verifica anche del contenuto. Le keywords sono uno dei tanti e diversi aspetti che il motore di ricerca valuta per indicizzare il sito. Esistono molti modi per migliorare l’indicizzazione della pagina, come per esempio la ripetizione di una parola chiave."),
+    Question("La presenza di una barra con il path di contesto in una pagina web evita il sovraccarico cognitivo dell’utente", "F", "L’eccesso di collegamenti e di cammini esplorativi può scoraggiare l’utente e fargli perdere di vista lo scopo della ricerca, inducendolo ad un sovraccarico cognitivo. Una barra con il path di contesto può aiutare da questo punto di vista, ma non è condizione sufficiente ala risoluzione del problema."),
+    Question("Il contenuto del metatag author influenza il posizionamento di una pagina web nelle pagine di risposta dei motori di ricerca", "F", "Il tag author specifica solo l’autore del contenuto."),
+    Question("Il layout a schede è fortemente consigliato in caso di tassonomie con molte voci nello stesso livello e poco profonde", "F", "Il layout a schede si sviluppa orizzontalmente rischiando di causare, in presenza ad esempio di menu orizzontali con molte voci allo stesso livello, lo scroll laterale che va possibilmente evitato."),
+    Question("La divisione tra contenuto e comportamento aiuta a migliorare il posizionamento nelle risposte dei motori di ricerca", "F", "unknown"),
+    Question("La divisione tra struttura e presentazione non contribuisce al posizionamento della pagina nelle SERP del motore di ricerca.", "F", "Il motore di ricerca guarda l’HTML e non lo stile, pertanto, a parità di righe (bytes) analizzate dall'inizio della pagina, poiché il motore non analizza solo tot bytes e non tutta, le pagine che presentano la suddetta separazione conterranno più informazioni utili di quelle che non la adottano."),
+    Question("Il contenuto del tag <title> deve sempre esprimere prima il contesto generale e poi quello particolare", "F", "Il tag <title> rappresenta il titolo della pagina, ed è obbligatorio dargli un valore, ma il contesto deve prima esprimere il contesto particolare e poi quello generale."),
+    Question("È buona norma utilizzare icone con bandiere per indicare link a pagine in altre lingue", "F", "Falso in quanto una lingua è parlata in molti stati diversi con bandiere diverse, e quindi si obbliga l’utente a pensare quale degli stati nel mondo parla la propria lingua, come per esempio per lo spagnolo che viene parlato in quasi tutto il Sud America oltre che alla Spagna."),
+    Question("L’uso dei menù a scomparsa non influisce sull'accessibilità di un sito.", "F", "L’uso di menù a scomparsa può causare problemi di accessibilità tra cui: 1) Se il menu è di scarsa qualità non tutte le sue voci possono essere raggiungibili mediante il tasto TAB. 2) Un menù non bene evidenziato puo portare certi utenti a perdere informazioni importanti per la buona fruizione del contenuto."),
+    Question("L’uso dei colori non influenza l’accessibilità del sito.", "F", "Bisogna assicurarsi che testo e grafica siano comprensibili se consultati senza il colore. Se alcune informazioni sono veicolate solo con il colore, come per esempio link visitati di un altro colore rispetto a quelli non, e le persone non distinguono i colori o perché hanno un monitor in bianco e nero non ricevono l’informazione. Inoltre bisogna fare attenzione ai contrasti dei colori usati."),
+    Question("Il tag <input> in XHTML può essere figlio diretto di una <form>", "F", "Deve essere figlio di un altro elemento contenuto nella <form> come per esempio <div>"),
+    Question("Permettere la fruibilità di una pagina mediante screen reader è condizione necessaria e sufficiente a garantirne l’accessibilità?", "F", "è condizione necessaria ma non sufficiente, una pagina per essere accessibile deve rispettare i requisiti di priorità 1 delle linee guida per l’accessibilità ai contenuti web."),
+    Question("Il numero massimo di voci in un menu è 6", "F", "Se la gerarchia è troppo ampia, porta a quello che si è definito “sovraccarico cognitivo”. Si è consigliato quindi di non andare oltre le 10 voci nel menu principale, ma che sarebbe ottimale non superare le 7. Questo non vale invece per la profondità della gerarchia il cui primo livello lo si trova nel menu principale, in quanto si consiglia di fermarsi a 4/5. La profondità della gerarchia spesso corrisponde al numero di click che l’utente deve fare per arrivare all’ultimo livello e 5 è il numero massimo di click consigliato visto che oggi gli utenti sono considerati pigri."),
+    Question("La separazione tra struttura, contenuto e presentazione aiuta il posizionamento nelle pagine SERP?", "F", "Non è possibile separare struttura e contenuto. La separazione è tra struttura, presentazione e comportamento. Questa separazione aiuta il posizionamento nelle pagine SERP in quanto il browser legge solo html, il quale corrisponde ai contenuti che la pagina offre, per trarne informazioni per il posizionamento, quindi file separati agevolano il posizionamento."),
 ]
